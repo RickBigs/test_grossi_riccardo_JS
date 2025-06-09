@@ -1,0 +1,161 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Inventario Magazzino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>Gestione Inventario Magazzino</h1>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="section">
+            <div class="card">
+                <div class="card__header">
+                    <h2>Aggiungi Nuovo Prodotto</h2>
+                </div>
+                <div class="card__body">
+                    <form id="formProdotti" class="product-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="nome">Nome Prodotto *</label>
+                                <input type="text" id="nome" name="nome" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="categoria">Categoria *</label>
+                                <input type="text" id="categoria" name="categoria" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="fornitore">Fornitore *</label>
+                                <input type="text" id="fornitore" name="fornitore" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="prezzo">Prezzo (€) *</label>
+                                <input type="number" id="prezzo" name="prezzo" class="form-control" step="0.01" min="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="quantita">Quantità *</label>
+                                <input type="number" id="quantita" name="quantita" class="form-control" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="sogliaMinima">Soglia Minima *</label>
+                                <input type="number" id="sogliaMinima" name="sogliaMinima" class="form-control" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary">Aggiungi Prodotto</button>
+                            <button type="reset" class="btn btn--secondary">Reset</button>
+                        </div>
+                    </form>
+                    <div id="messaggioSuccesso" class="success-message hidden">
+                        <p>Prodotto aggiunto con successo!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <div class="card">
+                <div class="card__header">
+                    <h3>Filtri e Ordinamento</h3>
+                </div>
+                <div class="card__body">
+                    <div class="filtri">
+                        <div class="filtri-gruppo">
+                            <label class="form-label" for="cerca">Ricerca per Nome/Fornitore</label>
+                            <input type="text" id="cerca" class="form-control" placeholder="Cerca prodotto o fornitore...">
+                        </div>
+                        <div class="filtri-gruppo">
+                            <label class="form-label" for="filtroCategorie">Categoria</label>
+                            <select id="filtroCategorie" class="form-control">
+                                <option value="">Tutte le categorie</option>
+                            </select>
+                        </div>
+                        <div class="filtri-gruppo">
+                            <label class="form-label" for="filtroScorte">Stato Scorte</label>
+                            <select id="filtroScorte" class="form-control">
+                                <option value="">Tutti</option>
+                                <option value="low">Scorte Basse</option>
+                                <option value="out">Esauriti</option>
+                            </select>
+                        </div>
+                        <div class="filtri-gruppo">
+                            <label class="form-label" for="ordinamento">Ordinamento</label>
+                            <select id="ordinamento" class="form-control">
+                                <option value="">Nessun ordinamento</option>
+                                <option value="name-asc">Nome A-Z</option>
+                                <option value="name-desc">Nome Z-A</option>
+                                <option value="category-asc">Categoria A-Z</option>
+                                <option value="category-desc">Categoria Z-A</option>
+                            </select>
+                        </div>
+                        <div class="filtroAzioni">
+                            <button id="resetFiltri" class="btn btn--outline">Reset Filtri</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <div class="card">
+                <div class="card__header">
+                    <h3>Elenco Prodotti</h3>
+                </div>
+                <div class="card__body">
+                    <div class="table-container">
+                        <table id="productsTable" class="products-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Fornitore</th>
+                                    <th>Prezzo</th>
+                                    <th>Quantità</th>
+                                    <th>Soglia Min.</th>
+                                    <th>Data Arrivo</th>
+                                    <th>Valore Totale</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabellaProdotti">
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8" style="text-align:right;font-weight:bold;">Valore Totale Inventario:</td>
+                                    <td id="totaleInventario" style="font-weight:bold;">€0.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div id="messaggioElimina" class="delete-message-hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Sistema Gestione Inventario by Grossi Riccardo</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
