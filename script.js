@@ -301,7 +301,7 @@ function messaggioEliminazione() {
     const msg = document.getElementById('messaggioElimina');
     msg.textContent = 'Prodotto eliminato';
     msg.classList.remove('hidden');
-    msg.classList.add('delete-message'); // Assicura stile rosso e grassetto
+    msg.classList.add('delete-message');
     setTimeout(() => {
         msg.classList.add('hidden');
         msg.classList.remove('delete-message');
